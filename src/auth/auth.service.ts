@@ -58,10 +58,12 @@ export class AuthService {
     const token = this.jwtService.sign(payload);
     return {
       token,
-      email: user.email,
-      f_name: user.f_name,
-      languge_learn: user.languge_learn,
-      languge_speak: user.languge_speak,
+      user: {
+        email: user.email,
+        f_name: user.f_name,
+        languge_learn: user.languge_learn,
+        languge_speak: user.languge_speak,
+      },
     };
   }
   private async hashPassword(password: string, salt: string): Promise<string> {

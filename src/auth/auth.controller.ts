@@ -1,7 +1,22 @@
-import { Body, Controller, Post, Logger } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Post,
+  Logger,
+  UseGuards,
+  Get,
+  UsePipes,
+  ValidationPipe,
+} from '@nestjs/common';
 import { AuthService } from './auth.service';
 import { SignupCredentials } from './DTO/SignupCredentials.DTO';
-import { SigninCredentials, SigninData } from './DTO/SigninCredentials.DTO';
+import {
+  SigninCredentials,
+  SigninData,
+  UserData,
+} from './DTO/SigninCredentials.DTO';
+import { AuthGuard } from '@nestjs/passport';
+import { GetUser } from './GetUser.Decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -16,5 +31,13 @@ export class AuthController {
   @Post('/signin')
   async signIn(@Body() signInDto: SigninCredentials): Promise<SigninData> {
     return await this.authService.signIn(signInDto);
+  }
+  @UseGuards(AuthGuard())
+  @UsePipes(ValidationPipe)
+  @Get('/getuser')
+  async getUser(@GetUser() user): Promise<UserData> {
+    const { email, f_name, languge_learn, languge_speak } = user;
+
+    return { email, f_name, languge_learn, languge_speak };
   }
 }

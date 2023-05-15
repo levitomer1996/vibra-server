@@ -11,6 +11,9 @@ export class SigninCredentials {
 
 export class SigninData {
   token: string;
+  user: UserData;
+}
+export class UserData {
   email: string;
   f_name: string;
   languge_speak: Language[];

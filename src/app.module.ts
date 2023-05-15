@@ -5,9 +5,12 @@ import { AuthController } from './auth/auth.controller';
 import { AuthModule } from './auth/auth.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { UserSchema } from './auth/Schemes/User.Scheme';
+import { FriendModule } from './friend/friend.module';
+import { ChatModule } from './chat/chat.module';
+import { FriendrequestModule } from './friendrequest/friendrequest.module';
 
 @Module({
-  imports: [AuthModule, MongooseModule.forRoot('mongodb://localhost:27017')],
+  imports: [AuthModule, MongooseModule.forRoot('mongodb://localhost:27017'), FriendModule, ChatModule, FriendrequestModule],
   controllers: [AppController, AuthController],
   providers: [AppService],
 })
