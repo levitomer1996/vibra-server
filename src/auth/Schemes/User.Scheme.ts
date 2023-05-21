@@ -1,6 +1,8 @@
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { Document } from 'mongoose';
 import Language from '../DTO/Languges.enum';
+import { Friendship } from 'src/friendship/Scheme/Friendship.scheme';
+import { FriendRequest } from 'src/friendrequest/Schemes/FriendRequest.scheme';
 
 @Schema()
 export class User extends Document {
@@ -18,6 +20,10 @@ export class User extends Document {
   languge_learn: Language[];
   @Prop({ required: true })
   user_rate: Number;
+  @Prop({ required: true })
+  friendship: Friendship[];
+  @Prop({ required: true })
+  friendRequest: FriendRequest[];
 }
 
 export const UserSchema = SchemaFactory.createForClass(User);

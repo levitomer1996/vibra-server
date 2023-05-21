@@ -2,7 +2,7 @@ import { BadRequestException, Injectable, Logger } from '@nestjs/common';
 import { SignupCredentials } from './DTO/SignupCredentials.DTO';
 import { InjectConnection, InjectModel } from '@nestjs/mongoose';
 import { User } from './Schemes/User.Scheme';
-import { Connection } from 'mongoose';
+import { Connection, Model } from 'mongoose';
 import * as bcrypt from 'bcryptjs';
 import { SigninCredentials, SigninData } from './DTO/SigninCredentials.DTO';
 import { JwtPayload } from './DTO/JWTPayload.interface';
@@ -11,7 +11,7 @@ import { JwtService } from '@nestjs/jwt';
 @Injectable()
 export class AuthService {
   constructor(
-    @InjectModel(User.name) private userModel,
+    @InjectModel(User.name) private userModel: Model<User>,
     @InjectConnection() private connection: Connection,
     private jwtService: JwtService,
   ) {}
@@ -30,6 +30,8 @@ export class AuthService {
       languge_learn,
       languge_speak,
       user_rate: 0,
+      friendRequest: [],
+      friendship: [],
     });
     try {
       this.logger.log('Saving user');

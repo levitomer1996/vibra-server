@@ -1,11 +1,11 @@
 import { IsEnum } from 'class-validator';
-import { User } from 'src/auth/Schemes/User.Scheme';
 
 export class FriendRequestDTO {
-  sender: User;
-  reciver: User;
+  sender: string;
+  reciver: string;
 }
 export enum FREINDREQUESTSTATUS {
   PENDING = 'PENDING',
   APPROVED = 'APPROVED',
+  DECLINED = 'DECLINED',
 }
